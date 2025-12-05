@@ -12,7 +12,7 @@ using UnityEngine;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 [Description("change time")]
-[BepInPlugin("pilo.thyme.gorillatag", "pilo.thyme.gorillatag.TimeGUI", "1.0.0")]
+[BepInPlugin("pilo.thyme.gorillatag.TimeGUI", "pilo.thyme.gorillatag.TimeGUI", "1.0.0")]
 public class Plugin : BaseUnityPlugin
 {
     private Texture2D bgTex;
@@ -72,19 +72,19 @@ public class Plugin : BaseUnityPlugin
             GUILayout.Box(Text);
             if (GUILayout.Button("Night", buttonStyle))
             {
-                Time(0);
+                SetTime(0);
             }
             if (GUILayout.Button("Evening", buttonStyle))
             {
-                Time(7);
+                SetTime(7);
             }
             if (GUILayout.Button("Morning", buttonStyle))
             {
-                Time(1);
+                SetTime(1);
             }
             if (GUILayout.Button("Day", buttonStyle))
             {
-                Time(3);
+                SetTime(3);
             }
 
             GUI.Label(new Rect(Screen.width - 100, Screen.height - 20, 100, 20), "thyme", buttonStyle);
@@ -93,7 +93,7 @@ public class Plugin : BaseUnityPlugin
         }
     }
 
-    public static void Time(int time)
+    public static void SetTime(int time)
     {
         BetterDayNightManager.instance.SetTimeOfDay(time);
     }
