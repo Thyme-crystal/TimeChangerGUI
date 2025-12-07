@@ -9,7 +9,9 @@ using HarmonyLib;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
+using static System.TimeZoneInfo;
 
 [Description("change time")]
 [BepInPlugin("pilo.thyme.gorillatag.TimeGUI", "pilo.thyme.gorillatag.TimeGUI", "1.0.0")]
@@ -40,11 +42,8 @@ public class Plugin : BaseUnityPlugin
         bgTex = new Texture2D(1, 1);
         bgTex.SetPixel(0, 0, new Color(0.2f, 0.2f, 0.2f, 0.8f));
         bgTex.Apply();
-
-        buttonTex = new Texture2D(1, 1);
-        buttonTex.SetPixel(0, 0, new Color(0.3f, 0.4f, 0.5f, 0.9f));
-        buttonTex.Apply();
     }
+
 
     public void OnGUI()
     {
@@ -60,9 +59,9 @@ public class Plugin : BaseUnityPlugin
         if (buttonStyle == null)
         {
             buttonStyle = new GUIStyle(GUI.skin.box);
-            buttonStyle.fontSize = 18;
+            buttonStyle.fontSize = 16;
             buttonStyle.alignment = TextAnchor.MiddleCenter;
-            buttonStyle.normal.textColor = Color.black;
+            buttonStyle.normal.textColor = new Color(178 / 255f, 154 / 255f, 255 / 255f);
             buttonStyle.normal.background = bgTex;
         }
 
@@ -87,6 +86,18 @@ public class Plugin : BaseUnityPlugin
                 SetTime(3);
             }
 
+            GUILayout.Label("| |");
+
+            if (GUILayout.Button("Rain", buttonStyle)) 
+            {
+                Rain(true);
+            }
+
+            if (GUILayout.Button("Stop", buttonStyle))
+            {
+                Rain(false);
+            }
+
             GUI.Label(new Rect(Screen.width - 100, Screen.height - 20, 100, 20), "thyme", buttonStyle);
 
             GUILayout.EndHorizontal();
@@ -98,7 +109,20 @@ public class Plugin : BaseUnityPlugin
         BetterDayNightManager.instance.SetTimeOfDay(time);
     }
 
-    public static string Text = "Time Changer GUI";
+    public static void Rain(bool rain)
+    {
+        if (rain)
+        {
+            BetterDayNightManager.instance.SetFixedWeather(BetterDayNightManager.WeatherType.Raining);
+        }
+
+        else
+        {
+            BetterDayNightManager.instance.SetFixedWeather(BetterDayNightManager.WeatherType.None);
+        }
+    }
+
+    public static string Text = "Time Changer";
     public static bool close = true;
     public static KeyCode OpenAndCloseGUI = KeyCode.B;
 
