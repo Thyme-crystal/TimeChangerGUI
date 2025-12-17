@@ -97,9 +97,7 @@ public class Plugin : BaseUnityPlugin
             {
                 Rain(false);
             }
-
-            GUI.Label(new Rect(Screen.width - 100, Screen.height - 20, 100, 20), "thyme", buttonStyle);
-
+            
             GUILayout.EndHorizontal();
         }
     }
