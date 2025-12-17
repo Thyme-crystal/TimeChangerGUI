@@ -88,16 +88,16 @@ public class Plugin : BaseUnityPlugin
 
             GUILayout.Label("| |");
 
-            if (GUILayout.Button("Rain", buttonStyle)) 
+            if (GUILayout.Button("Snow", buttonStyle))
             {
-                Rain(true);
+                Snow(true);
             }
 
             if (GUILayout.Button("Stop", buttonStyle))
             {
-                Rain(false);
+                Snow(false);
             }
-            
+
             GUILayout.EndHorizontal();
         }
     }
@@ -107,9 +107,9 @@ public class Plugin : BaseUnityPlugin
         BetterDayNightManager.instance.SetTimeOfDay(time);
     }
 
-    public static void Rain(bool rain)
+    public static void Snow(bool snow)
     {
-        if (rain)
+        if (snow)
         {
             BetterDayNightManager.instance.SetFixedWeather(BetterDayNightManager.WeatherType.Raining);
         }
